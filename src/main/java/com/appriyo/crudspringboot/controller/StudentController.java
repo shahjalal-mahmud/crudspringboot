@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/student/")
+@RequestMapping("/api/student")
 public class StudentController {
 
     @Autowired
@@ -25,5 +27,20 @@ public class StudentController {
         return studentService.getStudent(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity <List <Student>> getAllStudent(){
+        List<Student> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Student> deleteStudentById(@PathVariable Long id){
+        if (!studentService.isExist(id)){
+            return ResponseEntity.notFound().build();
+        }
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
     }
 }

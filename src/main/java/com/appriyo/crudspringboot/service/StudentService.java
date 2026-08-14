@@ -27,4 +27,14 @@ public class StudentService {
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
     }
+
+    // delete a student by id
+    public void deleteStudent(Long id){
+        studentRepository.deleteById(id);
+    }
+
+    // Find a student by id
+    public boolean isExist(Long id){
+        return studentRepository.existsById(id);
+    }
 }
