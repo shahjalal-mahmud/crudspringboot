@@ -37,7 +37,7 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails){
-        if (!studentService.isExist(id)){
+        if (studentService.isExist(id)){
             return ResponseEntity.notFound().build();
         }
         Student updateStudent = studentService.updateStudent(id, studentDetails);
@@ -47,7 +47,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable Long id){
-        if (!studentService.isExist(id)){
+        if (studentService.isExist(id)){
             return ResponseEntity.notFound().build();
         }
         studentService.deleteStudent(id);

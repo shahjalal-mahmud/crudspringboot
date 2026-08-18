@@ -31,7 +31,7 @@ public class StudentService {
     }
 
     public boolean isExist(Long id) {
-        return studentRepository.existsById(id);
+        return !studentRepository.existsById(id);
     }
 
     public Student updateStudent(Long id, Student studentDetails){
